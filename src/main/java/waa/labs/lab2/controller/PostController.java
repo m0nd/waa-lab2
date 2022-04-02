@@ -18,31 +18,30 @@ public class PostController {
         this.postService = postService;
     }
 
-    @GetMapping("/")
-    public List<PostDto> getAll() {
-        System.out.println("Inside getAll() Posts");
+    @GetMapping
+    public List<PostDto> getAllPosts() {
         return postService.getAllPosts();
     }
 
     @GetMapping("/{id}")
-    public PostDto getById(@PathVariable("id") int postId) {
+    public PostDto getPostById(@PathVariable("id") int postId) {
         return postService.getPostById(postId);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/")
-    public void save(@RequestBody PostDto newPost) {
+    @PostMapping
+    public void savePost(@RequestBody PostDto newPost) {
         postService.savePost(newPost);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
-    public void save(@PathVariable("id") int postId) {
+    public void deletePost(@PathVariable("id") int postId) {
         postService.deletePostById(postId);
     }
 
     @PutMapping("/{id}")
-    public void update(@PathVariable("id") int postId, @RequestBody PostDto post) {
+    public void updatePost(@PathVariable("id") int postId, @RequestBody PostDto post) {
         postService.updatePost(postId, post);
     }
 }

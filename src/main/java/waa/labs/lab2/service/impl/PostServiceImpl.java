@@ -31,8 +31,11 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void savePost(PostDto post) {
-        postRepo.save(modelMapper.map(post, Post.class));
+    public void savePost(PostDto postDto) {
+        Post newPost = new Post();
+        newPost.setTitle(postDto.getTitle());
+        newPost.setContent(postDto.getContent());
+        postRepo.save(newPost);
     }
 
     @Override
@@ -40,8 +43,8 @@ public class PostServiceImpl implements PostService {
         var postToUpdate = postRepo.findById(postId).orElse(null);
 
         if (postToUpdate != null) {
-            postToUpdate.setTitle(postDto.getPostTitle());
-            postToUpdate.setContent(postDto.getPostContent());
+            postToUpdate.setTitle(postDto.getTitle());
+            postToUpdate.setContent(postDto.getContent());
             postRepo.save(postToUpdate);
         }
     }

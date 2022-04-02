@@ -15,8 +15,13 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(name = "user_name")
     private String name;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "author_id")
     private List<Post> posts;
+
+    public void addToPosts(Post newPost) {
+        posts.add(newPost);
+    }
 }
